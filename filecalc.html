@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Access Mode Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    label {
+      margin-right: 15px;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #333;
+    }
+    fieldset {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>File Access Mode Calculator</h1>
+
+  <form id="access-form">
+    <fieldset>
+      <legend>Select permissions for each role:</legend>
+
+      <!-- Owner permissions -->
+      <h3>Owner</h3>
+      <label><input type="checkbox" id="owner-read" onclick="calculatePermissions()"> Read</label>
+      <label><input type="checkbox" id="owner-write" onclick="calculatePermissions()"> Write</label>
+      <label><input type="checkbox" id="owner-execute" onclick="calculatePermissions()"> Execute</label>
+
+      <!-- Group permissions -->
+      <h3>Group</h3>
+      <label><input type="checkbox" id="group-read" onclick="calculatePermissions()"> Read</label>
+      <label><input type="checkbox" id="group-write" onclick="calculatePermissions()"> Write</label>
+      <label><input type="checkbox" id="group-execute" onclick="calculatePermissions()"> Execute</label>
+
+      <!-- Others permissions -->
+      <h3>Others</h3>
+      <label><input type="checkbox" id="others-read" onclick="calculatePermissions()"> Read</label>
+      <label><input type="checkbox" id="others-write" onclick="calculatePermissions()"> Write</label>
+      <label><input type="checkbox" id="others-execute" onclick="calculatePermissions()"> Execute</label>
+    </fieldset>
+  </form>
+
+  <div class="result">
+    <strong>Permission Mode: </strong><span id="result">0000</span>
+  </div>
+
+  <script>
+    function calculatePermissions() {
+      // Calculate Owner permissions
+      let ownerRead = document.getElementById("owner-read").checked ? 4 : 0;
+      let ownerWrite = document.getElementById("owner-write").checked ? 2 : 0;
+      let ownerExecute = document.getElementById("owner-execute").checked ? 1 : 0;
+      let owner = ownerRead + ownerWrite + ownerExecute;
+
+      // Calculate Group permissions
+      let groupRead = document.getElementById("group-read").checked ? 4 : 0;
+      let groupWrite = document.getElementById("group-write").checked ? 2 : 0;
+      let groupExecute = document.getElementById("group-execute").checked ? 1 : 0;
+      let group = groupRead + groupWrite + groupExecute;
+
+      // Calculate Others permissions
+      let othersRead = document.getElementById("others-read").checked ? 4 : 0;
+      let othersWrite = document.getElementById("others-write").checked ? 2 : 0;
+      let othersExecute = document.getElementById("others-execute").checked ? 1 : 0;
+      let others = othersRead + othersWrite + othersExecute;
+
+      // Combine the permissions
+      let result = owner.toString() + group.toString() + others.toString();
+
+      // Display the result
+      document.getElementById("result").innerText = result;
+    }
+  </script>
+</body>
+</html>
